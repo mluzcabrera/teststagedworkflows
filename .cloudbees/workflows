@@ -3,8 +3,7 @@ kind: workflow
 name: release
 
 on:
-  push:
-    branches: **
+  workflow_dispatch:
 
 
 jobs:
