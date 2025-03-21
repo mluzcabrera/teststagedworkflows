@@ -6,14 +6,6 @@ on:
   push:
     branches: **
 
-metadata:
-  stages/v1alpha1:
-    - name: stage-1
-      jobs: [job-1, job-2]
-    - name: stage-2
-      jobs: [job-4, job-3]
-    - name: stage-3
-      jobs: [job-5, job-6]
 
 jobs:
   job-1:
