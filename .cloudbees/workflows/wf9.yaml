@@ -8,7 +8,7 @@ on:
 metadata:
   stages/v1alpha1:
     - name: stage-1
-      jobs: 
+      jobs: []
 
 jobs:
   job-1:
