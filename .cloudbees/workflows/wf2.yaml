@@ -8,9 +8,9 @@ on:
 metadata:
   stages/v1alpha1:
     - name: stage-1
-      jobs: [job-1,job2]
+      jobs: [job-1,job-2]
     - name: stage-2
-      jobs: [job-3,job4]
+      jobs: [job-3,job-4]
 
 jobs:
   job-1:
