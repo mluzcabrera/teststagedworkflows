@@ -5,7 +5,8 @@ name: wf3
 on:
   workflow_dispatch:
 
-metadata: {}
+metadata:
+    something/else: {}
 
 jobs:
   job-1:
