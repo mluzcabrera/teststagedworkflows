@@ -6,11 +6,6 @@ on:
   workflow_dispatch:
 
 metadata: {}
-#   stages/v1alpha1:
-#     - name: stage-1
-#       jobs: [job-1]
-#     - name: stage-2
-#       jobs: [job-3]
 
 jobs:
   job-1:
