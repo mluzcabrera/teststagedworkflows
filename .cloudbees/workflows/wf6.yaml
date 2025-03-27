@@ -6,6 +6,7 @@ name: wf3
 on:
   workflow_dispatch:
 
+# Invalid: metadata is nil
 metadata:
 
 
