@@ -6,6 +6,7 @@ name: wf3
 on:
   workflow_dispatch:
 
+# Invalid: Job 'job-2' depends on a job from a later Stage.
 metadata:
   stages/v1alpha1:
     - name: stage-1
