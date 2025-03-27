@@ -6,6 +6,7 @@ name: wf3
 on:
   workflow_dispatch:
 
+# Invalid: A job 'job-3' is part of more than one Stage
 metadata:
   stages/v1alpha1:
     - name: stage-1
