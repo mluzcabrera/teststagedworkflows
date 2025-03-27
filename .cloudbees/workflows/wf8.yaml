@@ -5,6 +5,7 @@ name: wf3
 on:
   workflow_dispatch:
 
+# Invalid: Stage without a job association
 metadata:
   stages/v1alpha1:
     - name: stage-1
