@@ -5,6 +5,7 @@ name: wf2
 on:
   workflow_dispatch:
 
+# Multiple stages and multiple jobs running sequentially
 metadata:
   stages/v1alpha1:
     - name: stage-1
