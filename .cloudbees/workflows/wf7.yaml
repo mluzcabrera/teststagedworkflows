@@ -5,6 +5,7 @@ name: wf7
 on:
   workflow_dispatch:
 
+# Invalid: stages are undefined
 metadata:
   stages/v1alpha1:
 
