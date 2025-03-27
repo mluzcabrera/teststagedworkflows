@@ -5,6 +5,7 @@ name: wf3
 on:
   workflow_dispatch:
 
+# Invalid: Job 'job-4' does not define an upstream Job dependency and it is part of a Stage which runs after another Stage.
 metadata:
   stages/v1alpha1:
     - name: stage-1
