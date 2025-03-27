@@ -5,6 +5,7 @@ name: wf3
 on:
   workflow_dispatch:
 
+# Invalid: jobs is an empty list within a stage.
 metadata:
   stages/v1alpha1:
     - name: stage-1
