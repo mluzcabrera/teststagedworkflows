@@ -6,6 +6,7 @@ name: wf3
 on:
   workflow_dispatch:
 
+# Invalid: Non existent job 'job-0' defined in a Stage
 metadata:
   stages/v1alpha1:
     - name: stage-1
