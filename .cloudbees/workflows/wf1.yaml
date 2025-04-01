@@ -5,11 +5,7 @@ name: wf1
 on:
   workflow_dispatch:
 
-# Single stage and single job
-metadata:
-  stages/v1alpha1:
-    - name: stage-1
-      jobs: [job-1]
+
 
 jobs:
   job-1:
