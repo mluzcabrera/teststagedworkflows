@@ -9,5 +9,15 @@ on:
         required: true
         description: A sample manifest should go here, to help user
 metadata:
-  stages/v1alpha1: []
-jobs: {}
+  stages/v1alpha1:
+    - name: Stage
+      jobs:
+        - job
+    - name: Stage1
+      jobs: []
+    - name: Stage2
+      jobs: []
+jobs:
+  job:
+    name: job
+    needs: []
