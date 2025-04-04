@@ -18,41 +18,19 @@ metadata:
       jobs: []
     - name: Stage
       jobs: []
-    - name: Stage1
-      jobs:
-        - job
-        - job3
-        - job4
-        - job5
     - name: Stage2
       jobs:
         - job1
         - job2
         - job6
 jobs:
-  job:
-    name: job
-    needs: []
   job1:
     name: job1
-    needs:
-      - job5
+    needs: []
   job2:
     name: job2
     needs:
       - job1
-  job3:
-    name: job3
-    needs:
-      - job
-  job4:
-    name: job4
-    needs:
-      - job3
-  job5:
-    name: job5
-    needs:
-      - job4
   job6:
     name: job6
     needs:
