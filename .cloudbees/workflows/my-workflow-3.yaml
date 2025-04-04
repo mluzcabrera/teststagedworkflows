@@ -10,32 +10,28 @@ on:
         description: A sample manifest should go here, to help user
 metadata:
   stages/v1alpha1:
-    - name: Stage4
-      jobs: []
-    - name: Stage7
-      jobs: []
-    - name: Stage6
-      jobs: []
     - name: Stage5
       jobs: []
     - name: Stage
-      jobs:
-        - build
+      jobs: []
     - name: Stage3
       jobs: []
     - name: Stage1
       jobs:
         - job
     - name: Stage2
-      jobs: []
+      jobs:
+        - job1
+        - job2
 jobs:
-  build:
-    steps:
-      - name: Say hello
-        uses: docker://golang:1.20.3-alpine3.17
-        shell: sh
-        run: |
-          echo "hello world"
   job:
     name: job
-    needs: build
+    needs: []
+  job1:
+    name: job1
+    needs:
+      - job
+  job2:
+    name: job2
+    needs:
+      - job1
