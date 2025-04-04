@@ -18,8 +18,9 @@ metadata:
       jobs: []
     - name: Stage
       jobs: []
-    - name: new name
-      jobs: []
+    - name: new name2
+      jobs:
+        - job7
     - name: Stage1
       jobs:
         - job
@@ -54,3 +55,6 @@ jobs:
   job6:
     name: job6
     needs: job2
+  job7:
+    name: job7
+    needs: []
