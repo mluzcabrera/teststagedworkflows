@@ -11,8 +11,7 @@ on:
 metadata:
   stages/v1alpha1:
     - name: Stage
-      jobs:
-        - job
+      jobs: []
     - name: Stage1
       jobs: []
     - name: Stage2
