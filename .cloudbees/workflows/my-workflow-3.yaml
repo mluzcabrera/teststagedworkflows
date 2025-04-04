@@ -18,50 +18,6 @@ metadata:
       jobs: []
     - name: Stage
       jobs: []
-    - name: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
-        pellentesque ultrices libero sed ullamcorper. Duis quam odio, sagittis a
-        ullamcorper non, lobortis vitae turpis. Vivamus nibh quam, interdum eget
-        ornare et, maximus ut diam. Praesent ullamcorper augue a sapien lacinia
-        rhoncus. Fusce et augue risus. Maecenas nec orci id sem aliquet
-        volutpat. In feugiat felis lorem, non ultrices turpis euismod ac. Fusce
-        sapien ex, aliquet non ultricies id, fermentum at magna. Pellentesque
-        habitant morbi tristique senectus et netus et malesuada fames ac turpis
-        egestas. Aenean orci quam, consequat eu rutrum in, convallis eu justo.
-        Pellentesque lorem metus, ornare nec dui at, condimentum scelerisque
-        metus. Aenean vehicula, eros ac vulputate porta, ipsum erat vulputate
-        ante, in aliquet massa lorem nec lacus. Donec mollis lorem at purus
-        interdum sollicitudin. Sed porta dui non nisi accumsan dignissim.  Nulla
-        sollicitudin erat non semper imperdiet. Cras elementum orci in lacus
-        ornare euismod. Suspendisse scelerisque non dolor a ornare. Orci varius
-        natoque penatibus et magnis dis parturient montes, nascetur ridiculus
-        mus. Mauris lorem risus, dictum quis enim vitae, volutpat dictum libero.
-        Sed luctus nisl non tellus tristique hendrerit. Aliquam tristique justo
-        non nulla aliquet, eu posuere tortor vestibulum. Donec magna lorem,
-        vehicula quis nisl ac, vehicula ultricies risus. Praesent porttitor nisl
-        urna.  Vivamus varius neque non dignissim dapibus. Sed sit amet
-        porttitor arcu. Curabitur eu turpis dui. Aenean pharetra ultrices
-        tellus, nec molestie neque. Etiam accumsan vel ex a egestas. Maecenas
-        tincidunt aliquam urna quis elementum. Pellentesque in augue elit.
-        Vivamus mollis est tincidunt leo tincidunt fringilla. Vestibulum
-        gravida, orci eu dapibus mollis, mauris erat finibus mauris, nec
-        vestibulum eros ex at erat. Nullam mollis sagittis porttitor.  Donec
-        tristique ipsum sit amet erat porta aliquam. Orci varius natoque
-        penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed
-        quis consequat ipsum. Morbi a lectus sed lorem congue posuere. In nisl
-        nibh, mattis sit amet massa et, ornare congue nisl. Suspendisse feugiat
-        diam diam, sed ultricies sapien placerat ac. Mauris ut nisi fermentum,
-        mollis justo laoreet, finibus ante.  Phasellus vehicula aliquam gravida.
-        Nullam mattis semper augue vel lacinia. Quisque porttitor vitae leo in
-        tincidunt. Vestibulum luctus scelerisque augue et sollicitudin. In hac
-        habitasse platea dictumst. Sed magna dolor, suscipit a ligula
-        consectetur, hendrerit tristique lorem. Nunc consequat arcu a molestie
-        congue. Curabitur luctus, sem in blandit aliquam, metus orci interdum
-        felis, ac interdum urna diam sed sapien. Pellentesque molestie, erat
-        quis rutrum porta, mauris ipsum eleifend mauris, id bibendum dolor lacus
-        id est. Nunc condimentum ultricies tortor sed dapibus. Morbi eros lacus,
-        sollicitudin vel tellus eget, scelerisque posuere sapien.
-      jobs:
-        - job7
     - name: Stage1
       jobs:
         - job
@@ -79,23 +35,25 @@ jobs:
     needs: []
   job1:
     name: job1
-    needs: job5
+    needs:
+      - job5
   job2:
     name: job2
     needs:
       - job1
   job3:
     name: job3
-    needs: job
+    needs:
+      - job
   job4:
     name: job4
-    needs: job3
+    needs:
+      - job3
   job5:
     name: job5
-    needs: job4
+    needs:
+      - job4
   job6:
     name: job6
-    needs: job2
-  job7:
-    name: job7
-    needs: []
+    needs:
+      - job2
