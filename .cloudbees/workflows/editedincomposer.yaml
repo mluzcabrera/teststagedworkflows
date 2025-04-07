@@ -8,9 +8,12 @@ metadata:
       jobs: [job-1]
 
 on:
-  push:
-    branches:
-      - '**'
+  workflow_dispatch:
+    inputs:
+      manifest:
+        type: string
+        required: true
+        description: A sample manifest should go here, to help user
 
 jobs:
   build:
