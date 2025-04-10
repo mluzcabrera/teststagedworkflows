@@ -1,12 +1,11 @@
 apiVersion: automation.cloudbees.io/v1alpha1
 kind: workflow
 name: My workflow
-
 metadata:
   stages/v1alpha1:
     - name: stage-1
-      jobs: [job-1]
-
+      jobs:
+        - job-1
 on:
   workflow_dispatch:
     inputs:
@@ -14,7 +13,6 @@ on:
         type: string
         required: true
         description: A sample manifest should go here, to help user
-
 jobs:
   build:
     steps:
@@ -23,3 +21,6 @@ jobs:
         shell: sh
         run: |
           echo "hello world"
+env:
+  he: llo
+  there: asdf
