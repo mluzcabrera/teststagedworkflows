@@ -32,3 +32,4 @@ jobs:
     needs: []
 env:
   a: calue
+  aa: a
