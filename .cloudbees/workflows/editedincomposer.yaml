@@ -30,6 +30,3 @@ jobs:
         shell: sh
         run: echo "hello world"
     needs: []
-env:
-  a: calue
-  aa: a
