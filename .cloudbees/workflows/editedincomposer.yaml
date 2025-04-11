@@ -1,6 +1,6 @@
 apiVersion: automation.cloudbees.io/v1alpha1
 kind: workflow
-name: My workflow 987
+name: My workflow 98788
 metadata:
   stages/v1alpha1:
     - name: Stage
@@ -30,6 +30,3 @@ jobs:
         shell: sh
         run: echo "hello world"
     needs: []
-env:
-  a: a
-  b: ",,,,,,"
