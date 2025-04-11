@@ -3,11 +3,6 @@ kind: workflow
 name: My workflow 987
 metadata:
   stages/v1alpha1:
-    - name: stage
-      jobs:
-        - job-1
-        - job1
-        - job2
     - name: Stage
       jobs:
         - job
@@ -26,6 +21,7 @@ jobs:
         shell: sh
         run: |
           echo "hello world"
+    needs: []
   job:
     name: job
     steps:
@@ -33,17 +29,7 @@ jobs:
         uses: docker://golang:1.20.3-alpine3.17
         shell: sh
         run: echo "hello world"
-    needs: job2
-  job1:
-    name: job1
-    outputs: {}
-    environment: ""
-    services: {}
-  job2:
-    name: job2
-    outputs: {}
-    environment: ""
-    services: {}
+    needs: []
 env:
   a: a
   b: ",,,,,,"
