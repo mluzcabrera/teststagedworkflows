@@ -3,9 +3,6 @@ kind: workflow
 name: My workflow monday
 metadata:
   stages/v1alpha1:
-    - name: Stage1
-      jobs:
-        - job1
     - name: Stage
       jobs:
         - job
@@ -33,15 +30,3 @@ jobs:
         shell: sh
         run: echo "hello world"
     needs: []
-  job1:
-    name: job1
-    needs:
-      - build
-    environment: ""
-    outputs: {}
-    services: {}
-    steps:
-      - name: Say hello
-        uses: docker://golang:1.20.3-alpine3.17
-        shell: sh
-        run: echo "hello world"
