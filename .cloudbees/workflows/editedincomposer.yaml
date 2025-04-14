@@ -3,6 +3,7 @@ kind: workflow
 name: My workflow monday
 metadata:
   stages/v1alpha1:
+  - name: Stage1
     
 on:
   workflow_dispatch:
