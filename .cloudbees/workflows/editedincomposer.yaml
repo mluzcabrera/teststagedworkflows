@@ -1,10 +1,6 @@
 apiVersion: automation.cloudbees.io/v1alpha1
 kind: workflow
-name: My workflow monday
-metadata:
-  stages/v1alpha1:
-  - name: Stage1
-    
+name: My workflow
 on:
   workflow_dispatch:
     inputs:
@@ -12,5 +8,17 @@ on:
         type: string
         required: true
         description: A sample manifest should go here, to help user
+metadata:
+  stages/v1alpha1:
+    - name: Stage
+      jobs:
+        - build
 jobs:
+  build:
+    steps:
+      - name: Say hello
+        uses: docker://golang:1.20.3-alpine3.17
+        shell: sh
+        run: |
+          echo "hello world"
 
