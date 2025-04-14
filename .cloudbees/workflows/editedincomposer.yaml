@@ -3,9 +3,7 @@ kind: workflow
 name: My workflow monday
 metadata:
   stages/v1alpha1:
-    - name: Stage
-      jobs:
-        - job
+    
 on:
   workflow_dispatch:
     inputs:
@@ -14,19 +12,4 @@ on:
         required: true
         description: A sample manifest should go here, to help user
 jobs:
-  build:
-    steps:
-      - name: Say hello
-        uses: docker://golang:1.20.3-alpine3.17
-        shell: sh
-        run: |
-          echo "hello world"
-    needs: []
-  job:
-    name: job
-    steps:
-      - name: Say hello
-        uses: docker://golang:1.20.3-alpine3.17
-        shell: sh
-        run: echo "hello world"
-    needs: []
+
