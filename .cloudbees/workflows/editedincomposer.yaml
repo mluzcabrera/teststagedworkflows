@@ -12,13 +12,36 @@ metadata:
   stages/v1alpha1:
     - name: Stage1
       jobs:
-        - job
+        - build
+        - test
+        - deploy
 jobs:
-  job:
-    name: job
+  build:
+    name: build
     needs: []
+    environment: ""
+    outputs: {}
+    services: {}
     steps:
-      - name: Say hello
+      - run: echo "hello world"
         uses: docker://golang:1.20.3-alpine3.17
+        name: Say hello
         shell: sh
-        run: echo "hello world"
+  test:
+    name: test
+    environment: ""
+    outputs: {}
+    services: {}
+    steps:
+      - uses: sadf
+        name: asf
+  deploy:
+    name: deploy
+    needs:
+      - test
+    environment: ""
+    outputs: {}
+    services: {}
+    steps:
+      - uses: asdf
+        name: asdf
