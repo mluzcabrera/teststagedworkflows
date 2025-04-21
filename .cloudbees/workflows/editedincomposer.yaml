@@ -100,9 +100,12 @@ jobs:
         shell: sh
         run: echo "hello world"
   job2:
-    needs: []
+    needs:
+      - d
+    environment: ""
+    outputs: {}
     steps:
-      - name: Say hello
+      - run: echo "hello world"
         uses: docker://golang:1.20.3-alpine3.17
+        name: Say hello
         shell: sh
-        run: echo "hello world"
