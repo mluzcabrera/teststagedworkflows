@@ -64,9 +64,12 @@ jobs:
         uses: docker://postgres:13
         env:
           DATABASE_URL: postgres://testuser:testpassword@localhost:5432/testdb
-        run: |
+        run: >
           sleep 60
-          echo "DATABASE_URL is $DATABASE_URL"
-          # Replace this with your actual test command.
-          psql -h localhost -U testuser -d testdb -c "SELECT 'Hello, PostgreSQL!' AS greeting;"
 
+          echo "DATABASE_URL is $DATABASE_URL"
+
+          # Replace this with your actual test command.
+
+          psql -h localhost -U testuser -d testdb -c "SELECT 'Hello,
+          PostgreSQL!' AS greeting;"
