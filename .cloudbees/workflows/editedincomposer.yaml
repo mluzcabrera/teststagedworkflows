@@ -19,7 +19,7 @@ metadata:
 jobs:
   a:
     needs: []
-    environment: a
+    environment: ""
     outputs: {}
     services:
       a:
