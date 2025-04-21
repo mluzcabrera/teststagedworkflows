@@ -8,7 +8,7 @@ on:
         type: string
         required: true
         description: A sample manifest should go here, to help user
-        default: "blabla"
+        default: blabla
 metadata:
   stages/v1alpha1:
     - name: Stage1
