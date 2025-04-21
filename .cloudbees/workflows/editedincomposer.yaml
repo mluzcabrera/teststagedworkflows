@@ -12,36 +12,45 @@ metadata:
   stages/v1alpha1:
     - name: Stage1
       jobs:
-        - build
-        - test
-        - deploy
+        - a
+        - c
+        - b
+        - d
 jobs:
-  build:
-    name: build
+  a:
     needs: []
-    environment: ""
+    environment: a
     outputs: {}
-    services: {}
+    services:
+      a:
+        image: a
     steps:
-      - run: echo "hello world"
-        uses: docker://golang:1.20.3-alpine3.17
-        name: Say hello
-        shell: sh
-  test:
-    name: test
-    environment: ""
-    outputs: {}
-    services: {}
-    steps:
-      - uses: sadf
-        name: asf
-  deploy:
-    name: deploy
+      - uses: s
+        name: s
+  b:
     needs:
-      - test
+      - a
     environment: ""
     outputs: {}
-    services: {}
     steps:
-      - uses: asdf
-        name: asdf
+      - uses: a
+        name: a
+  c:
+    needs:
+      - a
+      - b
+    timeout-minutes: 420
+    with:
+      instructions: inst
+      disallowLaunchByUser: false
+      approvers: 4b7f53fc-d4fe-11ec-bb55-42010a83ae55
+      notifyAllEligibleUsers: false
+    delegates: cloudbees-io/manual-approval/custom-job.yml@v1
+  d:
+    needs:
+      - c
+    environment: ""
+    outputs: {}
+    steps:
+      - uses: a
+        name: a
