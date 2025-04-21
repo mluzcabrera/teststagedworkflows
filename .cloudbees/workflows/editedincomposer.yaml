@@ -8,7 +8,6 @@ on:
         type: string
         required: true
         description: A sample manifest should go here, to help user
-        default: "blabla"
 metadata:
   stages/v1alpha1:
     - name: Stage1
@@ -16,7 +15,7 @@ metadata:
         - a
         - c
         - b
-        - d
+        - a2
     - name: Stage3
       jobs:
         - job2
@@ -37,8 +36,7 @@ jobs:
         name: Say hello
         shell: sh
   b:
-    needs:
-      - a
+    needs: a
     environment: ""
     outputs: {}
     steps:
@@ -58,7 +56,30 @@ jobs:
       approvers: 4b7f53fc-d4fe-11ec-bb55-42010a83ae55
       notifyAllEligibleUsers: false
     delegates: cloudbees-io/manual-approval/custom-job.yml@v1
-  d:
+  job:
+    needs: []
+    steps:
+      - name: Say hello
+        uses: docker://golang:1.20.3-alpine3.17
+        shell: sh
+        run: echo "hello world"
+  job1:
+    needs: job
+    steps:
+      - name: Say hello
+        uses: docker://golang:1.20.3-alpine3.17
+        shell: sh
+        run: echo "hello world"
+  job2:
+    needs: a2
+    environment: ""
+    outputs: {}
+    steps:
+      - run: echo "hello world"
+        uses: docker://golang:1.20.3-alpine3.17
+        name: Say hello
+        shell: sh
+  a2:
     needs:
       - c
     environment: ""
@@ -85,31 +106,5 @@ jobs:
 
           psql -h localhost -U testuser -d testdb -c "SELECT 'Hello,
           PostgreSQL!' AS greeting;"
-  job:
-    needs:
-      - job2
-    environment: ""
-    outputs: {}
-    steps:
-      - run: echo "hello world"
-        uses: docker://golang:1.20.3-alpine3.17
-        name: Say hello
-        shell: sh
-  job1:
-    needs:
-      - job
-    steps:
-      - name: Say hello
-        uses: docker://golang:1.20.3-alpine3.17
-        shell: sh
-        run: echo "hello world"
-  job2:
-    needs:
-      - d
-    environment: ""
-    outputs: {}
-    steps:
-      - run: echo "hello world"
-        uses: docker://golang:1.20.3-alpine3.17
-        name: Say hello
-        shell: sh
+      - uses: cloudbees-io/checkout@v1
+        name: checkout
