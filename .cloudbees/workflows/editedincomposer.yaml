@@ -118,7 +118,8 @@ jobs:
     needs:
       - job2
     environment: ""
-    outputs: {}
+    outputs:
+      anoutput: añsdlkfj
     steps:
       - uses: cloudbees-io/checkout@v1
         name: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam facilisis
