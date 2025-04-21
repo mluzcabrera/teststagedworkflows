@@ -21,20 +21,23 @@ jobs:
     needs: []
     environment: ""
     outputs: {}
-    services:
-      a:
-        image: a
     steps:
-      - uses: s
-        name: s
+      - name: Say hello
+        uses: docker://golang:1.20.3-alpine3.17
+        shell: sh
+        run: |
+          echo "hello world"
   b:
     needs:
       - a
     environment: ""
     outputs: {}
     steps:
-      - uses: a
-        name: a
+      - name: Say hello
+        uses: docker://golang:1.20.3-alpine3.17
+        shell: sh
+        run: |
+          echo "hello world"
   c:
     needs:
       - a
