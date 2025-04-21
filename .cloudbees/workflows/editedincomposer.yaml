@@ -51,6 +51,22 @@ jobs:
       - c
     environment: ""
     outputs: {}
+    services:
+      postgres:
+        image: postgres:13
+        env:
+          POSTGRES_USER: testuser
+          POSTGRES_PASSWORD: testpassword
+          POSTGRES_DB: testdb
+        args: postgres
     steps:
-      - uses: a
-        name: a
+      - name: Run tests against postgres db achange
+        uses: docker://postgres:13
+        env:
+          DATABASE_URL: postgres://testuser:testpassword@localhost:5432/testdb
+        run: |
+          sleep 60
+          echo "DATABASE_URL is $DATABASE_URL"
+          # Replace this with your actual test command.
+          psql -h localhost -U testuser -d testdb -c "SELECT 'Hello, PostgreSQL!' AS greeting;"
+
