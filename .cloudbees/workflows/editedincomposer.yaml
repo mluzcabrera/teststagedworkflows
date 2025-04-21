@@ -85,12 +85,15 @@ jobs:
           psql -h localhost -U testuser -d testdb -c "SELECT 'Hello,
           PostgreSQL!' AS greeting;"
   job:
-    needs: []
+    needs:
+      - job2
+    environment: ""
+    outputs: {}
     steps:
-      - name: Say hello
+      - run: echo "hello world"
         uses: docker://golang:1.20.3-alpine3.17
+        name: Say hello
         shell: sh
-        run: echo "hello world"
   job1:
     needs:
       - job
