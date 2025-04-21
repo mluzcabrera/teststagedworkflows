@@ -20,6 +20,7 @@ metadata:
     - name: Stage3
       jobs:
         - job2
+        - newjob
     - name: Stage
       jobs:
         - job
@@ -36,8 +37,10 @@ jobs:
         uses: docker://golang:1.20.3-alpine3.17
         name: Say hello
         shell: sh
+    needs: []
   b:
-    needs: a
+    needs:
+      - a
     environment: ""
     outputs: {}
     steps:
@@ -65,14 +68,16 @@ jobs:
         shell: sh
         run: echo "hello world"
   job1:
-    needs: job
+    needs:
+      - job
     steps:
       - name: Say hello
         uses: docker://golang:1.20.3-alpine3.17
         shell: sh
         run: echo "hello world"
   job2:
-    needs: a2
+    needs:
+      - a2
     environment: ""
     outputs: {}
     steps:
@@ -109,3 +114,11 @@ jobs:
           PostgreSQL!' AS greeting;"
       - uses: cloudbees-io/checkout@v1
         name: checkout
+  newjob:
+    needs:
+      - job2
+    environment: ""
+    outputs: {}
+    steps:
+      - uses: cloudbees-io/checkout@v1
+        name: a
