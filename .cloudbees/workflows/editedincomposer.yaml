@@ -27,8 +27,6 @@ metadata:
         - job1
 jobs:
   a:
-    needs:
-      - d
     environment: ""
     outputs: {}
     steps:
