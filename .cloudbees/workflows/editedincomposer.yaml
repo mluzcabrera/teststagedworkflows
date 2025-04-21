@@ -16,17 +16,27 @@ metadata:
         - c
         - b
         - d
+    - name: Stage3
+      jobs:
+        - job2
+    - name: Stage
+      jobs:
+        - job
+    - name: Stage2
+      jobs:
+        - job1
 jobs:
   a:
-    needs: []
+    needs:
+      - d
     environment: ""
     outputs: {}
     steps:
-      - name: Say hello
-        uses: docker://golang:1.20.3-alpine3.17
-        shell: sh
-        run: |
+      - run: |
           echo "hello world"
+        uses: docker://golang:1.20.3-alpine3.17
+        name: Say hello
+        shell: sh
   b:
     needs:
       - a
@@ -76,3 +86,25 @@ jobs:
 
           psql -h localhost -U testuser -d testdb -c "SELECT 'Hello,
           PostgreSQL!' AS greeting;"
+  job:
+    needs: []
+    steps:
+      - name: Say hello
+        uses: docker://golang:1.20.3-alpine3.17
+        shell: sh
+        run: echo "hello world"
+  job1:
+    needs:
+      - job
+    steps:
+      - name: Say hello
+        uses: docker://golang:1.20.3-alpine3.17
+        shell: sh
+        run: echo "hello world"
+  job2:
+    needs: []
+    steps:
+      - name: Say hello
+        uses: docker://golang:1.20.3-alpine3.17
+        shell: sh
+        run: echo "hello world"
