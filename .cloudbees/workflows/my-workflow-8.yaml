@@ -12,12 +12,43 @@ metadata:
   stages/v1alpha1:
     - name: Stage
       jobs:
+        - a
         - b
+        - a2
+        - b2
 jobs:
-  b:
+  a:
     needs: []
+    timeout-minutes: 4320
+    with:
+      instructions: ""
+      disallowLaunchByUser: false
+      approvers: ""
+      notifyAllEligibleUsers: false
+    delegates: cloudbees-io/manual-approval/custom-job.yml@v1
+  b:
+    needs:
+      - a
+    timeout-minutes: 4320
+    with:
+      instructions: ""
+      disallowLaunchByUser: false
+      approvers: ""
+      notifyAllEligibleUsers: false
+    delegates: cloudbees-io/manual-approval/custom-job.yml@v1
+  a2:
+    needs:
+      - b
     environment: ""
     outputs: {}
     steps:
-      - uses: b
-        name: b
+      - uses: a2
+        name: a2
+  b2:
+    needs:
+      - a2
+    environment: ""
+    outputs: {}
+    steps:
+      - uses: b3
+        name: b2
