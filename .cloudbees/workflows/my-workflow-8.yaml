@@ -12,19 +12,10 @@ metadata:
   stages/v1alpha1:
     - name: Stage
       jobs:
-        - a
         - b
 jobs:
-  a:
-    needs: []
-    environment: ""
-    outputs: {}
-    steps:
-      - uses: a
-        name: a
   b:
-    needs:
-      - a
+    needs: []
     environment: ""
     outputs: {}
     steps:
