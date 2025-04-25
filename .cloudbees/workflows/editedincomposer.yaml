@@ -21,9 +21,6 @@ metadata:
       jobs:
         - job2
         - newjob
-    - name: Stage
-      jobs:
-        - job
     - name: Stage2
       jobs:
         - job1
@@ -63,16 +60,9 @@ jobs:
       approvers: 4b7f53fc-d4fe-11ec-bb55-42010a83ae55
       notifyAllEligibleUsers: false
     delegates: cloudbees-io/manual-approval/custom-job.yml@v1
-  job:
-    needs: []
-    steps:
-      - name: Say hello
-        uses: docker://golang:1.20.3-alpine3.17
-        shell: sh
-        run: echo "hello world"
   job1:
     needs:
-      - job
+      - newjob
     steps:
       - name: Say hello
         uses: docker://golang:1.20.3-alpine3.17
