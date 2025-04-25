@@ -11,9 +11,6 @@ on:
         default: blabla
 metadata:
   stages/v1alpha1:
-    - name: Stage5
-      jobs:
-        - job4
     - name: Stage1
       jobs:
         - a
@@ -43,8 +40,7 @@ jobs:
         uses: docker://golang:1.20.3-alpine3.17
         name: Say hello
         shell: sh
-    needs:
-      - job4
+    needs: []
   b:
     needs:
       - a
@@ -179,9 +175,3 @@ jobs:
         uses: docker://golang:1.20.3-alpine3.17
         shell: sh
         run: echo "hello world"
-  job4:
-    environment: ""
-    outputs: {}
-    steps:
-      - uses: a
-        name: a
