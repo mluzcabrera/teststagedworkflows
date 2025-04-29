@@ -29,6 +29,9 @@ metadata:
         - job3
 jobs:
   a:
+    needs:
+      - job2
+    environment: ""
     outputs: {}
     steps:
       - run: |
