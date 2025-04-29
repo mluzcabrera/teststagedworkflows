@@ -29,7 +29,6 @@ metadata:
         - job3
 jobs:
   a:
-    environment: ""
     outputs: {}
     steps:
       - run: |
@@ -37,7 +36,6 @@ jobs:
         uses: docker://golang:1.20.3-alpine3.17
         name: Say hello
         shell: sh
-    needs: []
   b:
     needs:
       - a
