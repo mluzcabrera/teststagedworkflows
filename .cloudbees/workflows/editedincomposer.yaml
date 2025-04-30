@@ -19,7 +19,7 @@ metadata:
         - a2
         - aaa
         - bbbbb
-    - name: Stage3
+    - name: Stage1
       jobs:
         - job2
         - newjob
