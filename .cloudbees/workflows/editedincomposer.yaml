@@ -17,6 +17,8 @@ metadata:
         - c
         - b
         - a2
+        - aaa
+        - bbbbb
     - name: Stage3
       jobs:
         - job2
@@ -71,7 +73,7 @@ jobs:
         run: echo "hello world"
   job2:
     needs:
-      - a2
+      - bbbbb
     environment: ""
     outputs: {}
     steps:
@@ -82,6 +84,7 @@ jobs:
   a2:
     needs:
       - c
+      - newjob
     environment: ""
     outputs: {}
     services:
@@ -166,3 +169,19 @@ jobs:
         uses: docker://golang:1.20.3-alpine3.17
         shell: sh
         run: echo "hello world"
+  aaa:
+    needs:
+      - a2
+    environment: ""
+    outputs: {}
+    steps:
+      - uses: a
+        name: a
+  bbbbb:
+    needs:
+      - aaa
+    environment: AAAA_CORINNE
+    outputs: {}
+    steps:
+      - uses: b
+        name: b
