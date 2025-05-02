@@ -11,59 +11,37 @@ on:
         default: blabla
 metadata:
   stages/v1alpha1:
-    - name: Stage1
-      jobs:
-        - a
-        - c
-        - b
-        - a2
-        - aaa
-        - bbbbb
-    - name: Stage3
-      jobs:
-        - job2
-        - newjob
-    - name: Stage2
-      jobs:
-        - job1
     - name: Stage4
       jobs:
         - job3
+    - name: Stage
+      jobs:
+        - job
+    - name: Stage1
+      jobs:
+        - job1
+    - name: Stage2
+      jobs:
+        - job2
 jobs:
-  a:
-    environment: ""
-    outputs: {}
-    steps:
-      - run: |
-          echo "hello world"
-        uses: docker://golang:1.20.3-alpine3.17
-        name: Say hello
-        shell: sh
-  b:
-    needs:
-      - a
-    environment: ""
-    outputs: {}
+  job3:
+    needs: []
     steps:
       - name: Say hello
         uses: docker://golang:1.20.3-alpine3.17
         shell: sh
-        run: |
-          echo "hello world"
-  c:
+        run: echo "hello world"
+  job:
     needs:
-      - a
-      - b
-    timeout-minutes: 420
-    with:
-      instructions: inst
-      disallowLaunchByUser: false
-      approvers: 4b7f53fc-d4fe-11ec-bb55-42010a83ae55
-      notifyAllEligibleUsers: false
-    delegates: cloudbees-io/manual-approval/custom-job.yml@v1
+      - job3
+    steps:
+      - name: Say hello
+        uses: docker://golang:1.20.3-alpine3.17
+        shell: sh
+        run: echo "hello world"
   job1:
     needs:
-      - newjob
+      - job
     steps:
       - name: Say hello
         uses: docker://golang:1.20.3-alpine3.17
@@ -71,114 +49,9 @@ jobs:
         run: echo "hello world"
   job2:
     needs:
-      - bbbbb
-    environment: ""
-    outputs: {}
-    steps:
-      - run: echo "hello world"
-        uses: docker://golang:1.20.3-alpine3.17
-        name: Say hello
-        shell: sh
-  a2:
-    needs:
-      - c
-    environment: ""
-    outputs: {}
-    services:
-      postgres:
-        image: postgres:13
-        env:
-          POSTGRES_USER: testuser
-          POSTGRES_PASSWORD: testpassword
-          POSTGRES_DB: testdb
-        args: postgres
-    steps:
-      - name: Run tests against postgres db achange
-        uses: docker://postgres:13
-        env:
-          DATABASE_URL: postgres://testuser:testpassword@localhost:5432/testdb
-        run: >
-          sleep 60
-
-          echo "DATABASE_URL is $DATABASE_URL"
-
-          # Replace this with your actual test command.
-
-          psql -h localhost -U testuser -d testdb -c "SELECT 'Hello,
-          PostgreSQL!' AS greeting;"
-      - uses: cloudbees-io/checkout@v1
-        name: checkout
-  newjob:
-    needs:
-      - job2
-    environment: ""
-    outputs:
-      anoutput: añsdlkfj
-    steps:
-      - uses: cloudbees-io/checkout@v1
-        name: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam facilisis
-          pharetra orci, vel efficitur magna faucibus ac. Donec tempor ut sapien
-          bibendum gravida. Duis ac purus ornare diam interdum ornare. Etiam
-          eros sem, vestibulum id commodo a, fermentum ac nibh. Morbi vitae
-          lobortis erat, eu mollis lorem. Quisque eu risus id mi tincidunt
-          sollicitudin quis at quam. Sed ornare elit volutpat semper imperdiet.
-          Morbi sagittis facilisis leo eu faucibus. Vestibulum aliquam ante non
-          tellus consectetur interdum. Maecenas id nunc odio. Sed finibus
-          bibendum mauris, eget facilisis lacus malesuada at.  Sed sollicitudin
-          dolor ac massa faucibus, a egestas nibh fermentum. Quisque egestas
-          elementum nunc eu semper. Quisque at lacinia lorem. Duis nec faucibus
-          orci, vel semper turpis. Morbi hendrerit quam non metus convallis
-          faucibus. Nam dapibus eleifend tempor. Praesent viverra massa
-          convallis, fermentum felis a, pellentesque nibh. Proin massa neque,
-          vehicula in dui eget, iaculis sollicitudin neque. Donec mollis
-          sollicitudin velit, quis pretium dui auctor sit amet. Praesent ornare
-          luctus augue et interdum. Etiam porttitor erat nec blandit tincidunt.
-          Curabitur varius in quam id pretium. Maecenas eget diam vehicula,
-          sodales lacus vitae, consectetur massa. Mauris dictum viverra ligula
-          vel convallis.  Donec eleifend tristique enim sit amet commodo. Proin
-          luctus elit quis mi congue dignissim. Aenean tortor metus, pulvinar
-          quis sodales eget, auctor placerat nisl. Pellentesque non hendrerit
-          lectus, at viverra dolor. Duis ac luctus nulla, efficitur finibus
-          orci. Ut eget urna lorem. Integer eu tincidunt quam. Suspendisse
-          potenti. Sed suscipit convallis ligula. Nunc vitae eleifend tortor,
-          vitae ultricies nibh. Ut a congue nunc. Quisque sit amet efficitur
-          libero. Aenean gravida sagittis lectus id fringilla.  Vivamus
-          tincidunt nulla vitae nisi placerat, et fringilla nulla bibendum.
-          Maecenas magna arcu, semper nec nulla id, consectetur aliquet nisi.
-          Praesent tortor urna, placerat sit amet ultrices a, viverra nec leo.
-          Nam non erat porttitor, mollis lacus in, elementum justo. Integer
-          vitae velit egestas, molestie orci eu, volutpat nulla. Duis maximus ex
-          ut urna commodo mollis. Aliquam at magna sagittis, vulputate augue et,
-          finibus neque.  Quisque dapibus nec mi hendrerit consequat. Nunc
-          commodo lorem mollis accumsan dapibus. Mauris ut convallis elit. Nulla
-          facilisi. Curabitur eu auctor diam, vulputate cursus erat. Nulla sed
-          nulla ut ante molestie porttitor. Cras eget rutrum nulla. Quisque
-          vitae pharetra diam. Morbi dictum quis orci sodales euismod.
-          Suspendisse sit amet porttitor metus. Cras eu nibh magna. In vitae
-          sapien purus. Vivamus elementum dolor et iaculis porta. Vestibulum ut
-          ornare ligula. Nam aliquet tortor nisi, eu lacinia mi pellentesque a.
-        kind: deploy
-  job3:
-    needs:
       - job1
     steps:
       - name: Say hello
         uses: docker://golang:1.20.3-alpine3.17
         shell: sh
         run: echo "hello world"
-  aaa:
-    needs:
-      - a2
-    environment: ""
-    outputs: {}
-    steps:
-      - uses: a
-        name: a
-  bbbbb:
-    needs:
-      - aaa
-    environment: AAAA_CORINNE
-    outputs: {}
-    steps:
-      - uses: b
-        name: b
