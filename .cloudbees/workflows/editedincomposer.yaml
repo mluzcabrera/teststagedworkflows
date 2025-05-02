@@ -82,7 +82,6 @@ jobs:
   a2:
     needs:
       - c
-      - newjob
     environment: ""
     outputs: {}
     services:
