@@ -5,7 +5,7 @@ on:
   workflow_dispatch: null
 metadata:
   stages/v1alpha1:
-    - name: Stage
+    - name: Stage this is a very long name
       jobs:
         - call_rw1
     - name: Stage1
