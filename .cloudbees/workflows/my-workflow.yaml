@@ -10,7 +10,15 @@ on:
         description: A sample manifest should go here, to help user
 metadata:
   stages/v1alpha1:
-
+    - name: Stage
+      jobs:
+        - job
+    - name: Stage2
+      jobs:
+        - job2
+    - name: Stage1
+      jobs:
+        - job1
 jobs:
   build:
     steps:
@@ -19,3 +27,27 @@ jobs:
         shell: sh
         run: |
           echo "hello world"
+    needs: []
+  job:
+    needs: []
+    steps:
+      - name: Say hello
+        uses: docker://golang:1.20.3-alpine3.17
+        shell: sh
+        run: echo "hello world"
+  job1:
+    needs:
+      - job2
+    steps:
+      - name: Say hello
+        uses: docker://golang:1.20.3-alpine3.17
+        shell: sh
+        run: echo "hello world"
+  job2:
+    needs:
+      - job
+    steps:
+      - name: Say hello
+        uses: docker://golang:1.20.3-alpine3.17
+        shell: sh
+        run: echo "hello world"
