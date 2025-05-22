@@ -10,7 +10,7 @@ metadata:
         - call_rw1
     - name: Stage1
       jobs:
-        - job
+        - job, entrygate, deploy, exitgate
 jobs:
   entrygate:
     timeout-minutes: 4320
