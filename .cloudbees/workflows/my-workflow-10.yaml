@@ -5,13 +5,14 @@ on:
   workflow_dispatch: null
 metadata:
   stages/v1alpha1:
-    - name: Stage this is a very long name
+    - name: Build
       jobs:
-        - call_rw1
-        - a
+        - call_rw_build
     - name: Stage1
       jobs:
-        - job,entrygate,deploy,exitgate
+        - entrygate
+        - deploy
+        - exitgate
 jobs:
   entrygate:
     timeout-minutes: 4320
@@ -21,7 +22,7 @@ jobs:
       approvers: 4b7f53fc-d4fe-11ec-bb55-42010a83ae55
       notifyAllEligibleUsers: false
     delegates: cloudbees-io/manual-approval/custom-job.yml@v1
-  call_rw1:
+  call_rw_build:
     uses: mluzcabrera/testreusableworkflows/.cloudbees/workflows/rw1.yaml
   job:
     needs: a
@@ -44,9 +45,4 @@ jobs:
       approvers: 4b7f53fc-d4fe-11ec-bb55-42010a83ae55
       notifyAllEligibleUsers: false
     delegates: cloudbees-io/manual-approval/custom-job.yml@v1
-  a:
-    needs:
-      - call_rw1
-    steps:
-      - uses: a
-        name: a
+
