@@ -8,6 +8,7 @@ metadata:
     - name: Stage this is a very long name
       jobs:
         - call_rw1
+        - a
     - name: Stage1
       jobs:
         - job,entrygate,deploy,exitgate
@@ -20,13 +21,10 @@ jobs:
       approvers: 4b7f53fc-d4fe-11ec-bb55-42010a83ae55
       notifyAllEligibleUsers: false
     delegates: cloudbees-io/manual-approval/custom-job.yml@v1
-  
   call_rw1:
     uses: mluzcabrera/testreusableworkflows/.cloudbees/workflows/rw1.yaml
-    needs: []
   job:
-    needs:
-      - call_rw1
+    needs: a
     steps:
       - name: Say hello
         uses: docker://golang:1.20.3-alpine3.17
@@ -46,3 +44,9 @@ jobs:
       approvers: 4b7f53fc-d4fe-11ec-bb55-42010a83ae55
       notifyAllEligibleUsers: false
     delegates: cloudbees-io/manual-approval/custom-job.yml@v1
+  a:
+    needs:
+      - call_rw1
+    steps:
+      - uses: a
+        name: a
