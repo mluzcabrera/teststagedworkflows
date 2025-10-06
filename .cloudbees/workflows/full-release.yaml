@@ -42,9 +42,6 @@ metadata:
         - roll-out-feature-flags
 jobs:
   create-release-issue:
-    outputs:
-      issue-key: ${{ steps.create-release-issue.outputs.issue-key }}
-      issue-url: ${{ steps.create-release-issue.outputs.issue-url }}
     steps:
       - name: Say hello
         uses: docker://golang:1.20.3-alpine3.17
@@ -54,10 +51,6 @@ jobs:
   gather-evidence:
     needs:
       - create-release-issue
-    outputs:
-      issues: ${{ steps.get-issues.outputs.issues }}
-      total: ${{ steps.get-issues.outputs.total }}
-      issues-table: ${{ steps.format-issues.outputs.issues-table }}
     steps:
       - name: Say hello
         uses: docker://golang:1.20.3-alpine3.17
@@ -67,10 +60,6 @@ jobs:
   quality-checks:
     needs:
       - gather-evidence
-    outputs:
-      security-scan-results: ${{ steps.security-scan.outputs.results }}
-      code-quality-score: ${{ steps.code-analysis.outputs.quality-score }}
-      dependency-vulnerabilities: ${{ steps.dependency-check.outputs.vulnerabilities }}
     steps:
       - name: Say hello
         uses: docker://golang:1.20.3-alpine3.17
