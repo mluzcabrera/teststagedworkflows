@@ -88,14 +88,13 @@ jobs:
   deploy-to-qa:
     needs:
       - approval
-    uses: cloudbees-days/hackers-app/.cloudbees/workflows/deployer.yaml
-    with:
-      manifest: ${{ inputs.manifest }}
-      environment: hackers-qa
-    secrets: inherit
-    vars: inherit
+    steps:
+      - name: Say hello
+        uses: docker://golang:1.20.3-alpine3.17
+        shell: sh
+        run: |
+          echo "hello world"
   enable-feature-flags-qa:
-    environment: hackers-qa
     needs:
       - deploy-to-qa
     steps:
@@ -105,7 +104,6 @@ jobs:
         run: |
           echo "hello world"
   run-tests-qa:
-    environment: hackers-qa
     needs:
       - enable-feature-flags-qa
     steps:
@@ -115,7 +113,6 @@ jobs:
         run: |
           echo "hello world"
   exit-criteria-qa:
-    environment: hackers-qa
     needs:
       - run-tests-qa
     steps:
@@ -137,14 +134,13 @@ jobs:
   deploy-to-staging:
     needs:
       - release-manager-approval
-    uses: cloudbees-days/hackers-app/.cloudbees/workflows/deployer.yaml
-    with:
-      manifest: ${{ inputs.manifest }}
-      environment: hackers-staging
-    secrets: inherit
-    vars: inherit
+    steps:
+      - name: Say hello
+        uses: docker://golang:1.20.3-alpine3.17
+        shell: sh
+        run: |
+          echo "hello world"
   enable-feature-flags-staging:
-    environment: hackers-staging
     needs:
       - deploy-to-staging
     steps:
@@ -154,7 +150,6 @@ jobs:
         run: |
           echo "hello world"
   run-tests-staging:
-    environment: hackers-staging
     needs:
       - enable-feature-flags-staging
     steps:
@@ -164,7 +159,6 @@ jobs:
         run: |
           echo "hello world"
   exit-criteria-staging:
-    environment: hackers-staging
     needs:
       - run-tests-staging
     steps:
@@ -194,14 +188,13 @@ jobs:
   deploy-to-prod:
     needs:
       - wait-for-snow-change-request
-    uses: cloudbees-days/hackers-app/.cloudbees/workflows/deployer.yaml
-    with:
-      manifest: ${{ inputs.manifest }}
-      environment: hackers-prod
-    secrets: inherit
-    vars: inherit
+    steps:
+      - name: Say hello
+        uses: docker://golang:1.20.3-alpine3.17
+        shell: sh
+        run: |
+          echo "hello world"
   run-smoke-tests:
-    environment: hackers-prod
     needs:
       - deploy-to-prod
     steps:
@@ -211,7 +204,6 @@ jobs:
         run: |
           echo "hello world"
   roll-out-feature-flags:
-    environment: hackers-prod
     needs:
       - run-smoke-tests
     steps:
