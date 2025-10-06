@@ -119,10 +119,6 @@ jobs:
     environment: hackers-qa
     needs:
       - enable-feature-flags-qa
-    outputs:
-      test-results: ${{ steps.test-execution.outputs.results }}
-      test-coverage: ${{ steps.test-execution.outputs.coverage }}
-      performance-metrics: ${{ steps.performance-tests.outputs.metrics }}
     steps:
       - name: Say hello
         uses: docker://golang:1.20.3-alpine3.17
@@ -133,9 +129,6 @@ jobs:
     environment: hackers-qa
     needs:
       - run-tests-qa
-    outputs:
-      gate-status: ${{ steps.evaluate-criteria.outputs.status }}
-      blocking-issues: ${{ steps.check-issues.outputs.blocking-count }}
     steps:
       - name: Say hello
         uses: docker://golang:1.20.3-alpine3.17
@@ -175,9 +168,6 @@ jobs:
     environment: hackers-staging
     needs:
       - enable-feature-flags-staging
-    outputs:
-      test-results: ${{ steps.staging-tests.outputs.results }}
-      e2e-results: ${{ steps.e2e-tests.outputs.results }}
     steps:
       - name: Say hello
         uses: docker://golang:1.20.3-alpine3.17
@@ -188,9 +178,6 @@ jobs:
     environment: hackers-staging
     needs:
       - run-tests-staging
-    outputs:
-      production-readiness: ${{ steps.readiness-check.outputs.status }}
-      risk-assessment: ${{ steps.risk-analysis.outputs.level }}
     steps:
       - name: Say hello
         uses: docker://golang:1.20.3-alpine3.17
@@ -228,9 +215,6 @@ jobs:
     environment: hackers-prod
     needs:
       - deploy-to-prod
-    outputs:
-      health-status: ${{ steps.health-check.outputs.status }}
-      smoke-results: ${{ steps.smoke-tests.outputs.results }}
     steps:
       - name: Say hello
         uses: docker://golang:1.20.3-alpine3.17
