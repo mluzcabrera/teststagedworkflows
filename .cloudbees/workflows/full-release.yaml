@@ -43,11 +43,11 @@ metadata:
 jobs:
   create-release-issue:
     steps:
-      - name: Say hello
+      - run: |
+          echo "hello world wth"
         uses: docker://golang:1.20.3-alpine3.17
+        name: Say hello
         shell: sh
-        run: |
-          echo "hello world"
   gather-evidence:
     needs:
       - create-release-issue
