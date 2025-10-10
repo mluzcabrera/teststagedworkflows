@@ -72,11 +72,11 @@ jobs:
       - create-release-issue
       - gather-evidence
     steps:
-      - name: Say hello
+      - run: |
+          echo "hello woadsfasdfrld"
         uses: docker://golang:1.20.3-alpine3.17
+        name: Say hello
         shell: sh
-        run: |
-          echo "hello world"
   approval:
     needs:
       - update-jira-tickets
