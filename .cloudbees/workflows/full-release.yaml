@@ -20,6 +20,7 @@ metadata:
         - quality-checks
         - update-jira-tickets
         - approval
+        - callasdfas
     - name: Quality Assurance
       jobs:
         - deploy-to-qa
@@ -49,8 +50,7 @@ jobs:
         name: Say hello
         shell: sh
   gather-evidence:
-    needs:
-      - create-release-issue
+    needs: create-release-issue
     steps:
       - name: Say hello
         uses: docker://golang:1.20.3-alpine3.17
@@ -58,8 +58,7 @@ jobs:
         run: |
           echo "hello world"
   quality-checks:
-    needs:
-      - gather-evidence
+    needs: gather-evidence
     steps:
       - name: Say hello
         uses: docker://golang:1.20.3-alpine3.17
@@ -78,16 +77,14 @@ jobs:
         name: Say hello
         shell: sh
   approval:
-    needs:
-      - update-jira-tickets
+    needs: update-jira-tickets
     timeout-minutes: 4320
     with:
       instructions: ""
       disallowLaunchByUser: false
     delegates: cloudbees-io/manual-approval/custom-job.yml@v1
   deploy-to-qa:
-    needs:
-      - approval
+    needs: callasdfas
     steps:
       - name: Say hello
         uses: docker://golang:1.20.3-alpine3.17
@@ -95,8 +92,7 @@ jobs:
         run: |
           echo "hello world"
   enable-feature-flags-qa:
-    needs:
-      - deploy-to-qa
+    needs: deploy-to-qa
     steps:
       - name: Say hello
         uses: docker://golang:1.20.3-alpine3.17
@@ -104,8 +100,7 @@ jobs:
         run: |
           echo "hello world"
   run-tests-qa:
-    needs:
-      - enable-feature-flags-qa
+    needs: enable-feature-flags-qa
     steps:
       - name: Say hello
         uses: docker://golang:1.20.3-alpine3.17
@@ -113,8 +108,7 @@ jobs:
         run: |
           echo "hello world"
   exit-criteria-qa:
-    needs:
-      - run-tests-qa
+    needs: run-tests-qa
     steps:
       - name: Say hello
         uses: docker://golang:1.20.3-alpine3.17
@@ -122,8 +116,7 @@ jobs:
         run: |
           echo "hello world"
   release-manager-approval:
-    needs:
-      - exit-criteria-qa
+    needs: exit-criteria-qa
     timeout-minutes: 4320
     delegates: cloudbees-io/manual-approval/custom-job.yml@v1
     with:
@@ -132,8 +125,7 @@ jobs:
       approvers: ""
       notifyAllEligibleUsers: false
   deploy-to-staging:
-    needs:
-      - release-manager-approval
+    needs: release-manager-approval
     steps:
       - name: Say hello
         uses: docker://golang:1.20.3-alpine3.17
@@ -141,8 +133,7 @@ jobs:
         run: |
           echo "hello world"
   enable-feature-flags-staging:
-    needs:
-      - deploy-to-staging
+    needs: deploy-to-staging
     steps:
       - name: Say hello
         uses: docker://golang:1.20.3-alpine3.17
@@ -150,8 +141,7 @@ jobs:
         run: |
           echo "hello world"
   run-tests-staging:
-    needs:
-      - enable-feature-flags-staging
+    needs: enable-feature-flags-staging
     steps:
       - name: Say hello
         uses: docker://golang:1.20.3-alpine3.17
@@ -159,8 +149,7 @@ jobs:
         run: |
           echo "hello world"
   exit-criteria-staging:
-    needs:
-      - run-tests-staging
+    needs: run-tests-staging
     steps:
       - name: Say hello
         uses: docker://golang:1.20.3-alpine3.17
@@ -168,8 +157,7 @@ jobs:
         run: |
           echo "hello world"
   create-snow-change-request:
-    needs:
-      - exit-criteria-staging
+    needs: exit-criteria-staging
     steps:
       - name: Say hello
         uses: docker://golang:1.20.3-alpine3.17
@@ -177,8 +165,7 @@ jobs:
         run: |
           echo "hello world"
   wait-for-snow-change-request:
-    needs:
-      - create-snow-change-request
+    needs: create-snow-change-request
     steps:
       - name: Say hello
         uses: docker://golang:1.20.3-alpine3.17
@@ -186,8 +173,7 @@ jobs:
         run: |
           echo "hello world"
   deploy-to-prod:
-    needs:
-      - wait-for-snow-change-request
+    needs: wait-for-snow-change-request
     steps:
       - name: Say hello
         uses: docker://golang:1.20.3-alpine3.17
@@ -195,8 +181,7 @@ jobs:
         run: |
           echo "hello world"
   run-smoke-tests:
-    needs:
-      - deploy-to-prod
+    needs: deploy-to-prod
     steps:
       - name: Say hello
         uses: docker://golang:1.20.3-alpine3.17
@@ -204,11 +189,15 @@ jobs:
         run: |
           echo "hello world"
   roll-out-feature-flags:
-    needs:
-      - run-smoke-tests
+    needs: run-smoke-tests
     steps:
       - name: Say hello
         uses: docker://golang:1.20.3-alpine3.17
         shell: sh
         run: |
           echo "hello world"
+  callasdfas:
+    needs:
+      - approval
+    uses: mluzcabrera/reusableworkflowsrepo/.cloudbees/workflows/reusable.yaml
+    secrets: inherit
