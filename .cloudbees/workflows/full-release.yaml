@@ -201,3 +201,4 @@ jobs:
       - approval
     uses: mluzcabrera/reusableworkflowsrepo/.cloudbees/workflows/reusable.yaml
     secrets: inherit
+    vars: inherit
