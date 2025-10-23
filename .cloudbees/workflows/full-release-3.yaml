@@ -92,7 +92,7 @@ jobs:
         run: |
           echo "hello world"
   enable-feature-flags-qa:
-    needs: deploy-to-qa
+    needs: deploy-to-qa-wrong
     steps:
       - name: Say hello
         uses: docker://golang:1.20.3-alpine3.17
